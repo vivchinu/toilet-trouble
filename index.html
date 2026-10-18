@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#0d1b2a" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>Toilet Trouble</title>
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <!-- Root of the DOM overlay. In immersive AR it is passed as domOverlay.root when the browser supports it. -->
+  <div id="overlay">
+
+    <!-- START -->
+    <section id="screen-start" class="screen card">
+      <h1 class="logo">TOILET<br/><span>TROUBLE</span></h1>
+      <p class="tag">A mixed reality slingshot game</p>
+      <p class="lead">Choose a toilet, aim your slingshot, and land the poop inside!</p>
+      <button id="btn-start" class="btn big" disabled>Loading…</button>
+      <p id="support" class="small"></p>
+    </section>
+
+    <!-- TOILET SELECTION -->
+    <section id="screen-select" class="screen hidden">
+      <div class="select-panel card">
+        <h2>Choose your toilet</h2>
+        <div id="toilet-list" class="toilet-list"></div>
+        <div class="row">
+          <button id="btn-place-ar" class="btn">Select &amp; Place in AR</button>
+          <button id="btn-place-desktop" class="btn alt">Desktop Test Mode</button>
+        </div>
+        <p id="select-note" class="small"></p>
+      </div>
+    </section>
+
+    <!-- GAME HUD (desktop mode, or AR when DOM overlay is supported) -->
+    <section id="hud" class="hidden">
+      <div class="hud-top">
+        <div class="stat"><b id="hud-score">0</b><small>SCORE</small></div>
+        <div class="stat"><b id="hud-hits">0 / 0</b><small>HITS / SHOTS</small></div>
+        <div class="stat poop-chip" id="hud-poop"><i id="hud-poop-swatch"></i><span id="hud-poop-name">Classic</span></div>
+        <div id="mode-badge" class="badge"></div>
+      </div>
+      <div class="hud-bottom">
+        <button id="btn-poop" class="btn small-btn">Change Poop</button>
+        <button id="btn-toilet" class="btn small-btn">Change Toilet</button>
+        <button id="btn-restart" class="btn small-btn">Restart</button>
+        <button id="btn-exit" class="btn small-btn alt hidden">Exit AR</button>
+      </div>
+      <p id="hint" class="hint"></p>
+    </section>
+
+    <!-- ROUND OVER -->
+    <section id="screen-over" class="screen hidden">
+      <div class="card">
+        <h2>Round over!</h2>
+        <p class="big-num" id="over-score">0</p>
+        <p id="over-detail"></p>
+        <button id="btn-again" class="btn big">Play Again</button>
+      </div>
+    </section>
+
+    <div id="toast" class="toast hidden"></div>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+:root {
+  --bg: #0d1b2a;
+  --panel: rgba(13, 27, 42, 0.86);
+  --edge: #3fc3ff;
+  --accent: #ffcc33;
+  --accent2: #7be35a;
+  --text: #f4f8ff;
+  --muted: #9fb4c8;
+  --danger: #ff6b6b;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: var(--bg); color: var(--text);
+  font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif; }
+canvas { display: block; position: fixed; inset: 0; touch-action: none; }
+html, body { overscroll-behavior: none; -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; }
+button { touch-action: manipulation; }
+#overlay { position: fixed; inset: 0; pointer-events: none; z-index: 2; }
+#overlay .screen, #overlay #hud > *, #overlay .toast { pointer-events: auto; }
+#hud { pointer-events: none; }
+.hidden { display: none !important; }
+
+.screen { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 16px; }
+.card { background: var(--panel); border: 2px solid var(--edge); border-radius: 22px; padding: 28px 32px;
+  box-shadow: 0 0 40px rgba(63, 195, 255, .35); text-align: center; max-width: 720px; }
+#screen-start { flex-direction: column; margin: auto; inset: auto; position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%); width: min(560px, calc(100% - 32px)); }
+
+.logo { font-size: clamp(44px, 9vw, 84px); line-height: .9; margin: 0 0 8px; color: #fff; letter-spacing: 2px;
+  text-shadow: 0 4px 0 #2a6fd6, 0 8px 18px rgba(0,0,0,.6); }
+.logo span { color: var(--accent); text-shadow: 0 4px 0 #b86b00, 0 8px 18px rgba(0,0,0,.6); }
+.tag { display: inline-block; margin: 6px 0 14px; padding: 6px 16px; border-radius: 999px; background: #123f73;
+  border: 1px solid var(--edge); font-weight: bold; letter-spacing: 1px; text-transform: uppercase; font-size: 13px; }
+.lead { font-size: 20px; margin: 8px 0 22px; }
+.small { font-size: 14px; color: var(--muted); margin: 14px 0 0; }
+.small.warn { color: var(--accent); }
+
+.btn { font: inherit; font-weight: bold; font-size: 18px; color: #10233a; background: var(--accent); border: 0;
+  border-radius: 14px; padding: 12px 22px; cursor: pointer; box-shadow: 0 4px 0 #b86b00; transition: transform .08s; }
+.btn:hover:not(:disabled) { transform: translateY(-2px); }
+.btn:active:not(:disabled) { transform: translateY(2px); box-shadow: 0 1px 0 #b86b00; }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.btn.big { font-size: 24px; padding: 16px 40px; }
+.btn.alt { background: #3fc3ff; box-shadow: 0 4px 0 #1b6c99; }
+.small-btn { font-size: 15px; padding: 9px 14px; }
+
+/* Selection: panel along the bottom so the 3D preview stays visible above it */
+#screen-select { align-items: flex-end; }
+.select-panel { width: min(900px, 100%); padding: 18px 20px; }
+.select-panel h2 { margin: 0 0 12px; }
+.toilet-list { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 14px; }
+.toilet-card { background: #10263d; border: 2px solid #24486b; border-radius: 14px; padding: 6px; cursor: pointer;
+  color: var(--text); font: inherit; font-weight: bold; }
+.toilet-card img { width: 100%; aspect-ratio: 1; object-fit: contain; display: block; }
+.toilet-card.selected { border-color: var(--accent); box-shadow: 0 0 16px rgba(255, 204, 51, .6); }
+.toilet-card.failed { opacity: .4; cursor: not-allowed; }
+.row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+/* HUD */
+.hud-top { position: absolute; top: calc(12px + env(safe-area-inset-top)); left: calc(12px + env(safe-area-inset-left)); right: calc(12px + env(safe-area-inset-right)); display: flex; gap: 10px; align-items: stretch; flex-wrap: wrap; }
+.stat { background: var(--panel); border: 2px solid var(--edge); border-radius: 14px; padding: 6px 14px; min-width: 96px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.stat b { font-size: 26px; }
+.stat small { font-size: 11px; color: var(--muted); letter-spacing: 1px; }
+.poop-chip { flex-direction: row; gap: 8px; cursor: pointer; }
+.poop-chip i { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #fff; display: inline-block; }
+.badge { margin-left: auto; align-self: center; background: #4a2a00; color: var(--accent); border: 1px solid var(--accent);
+  border-radius: 10px; padding: 6px 10px; font-size: 13px; font-weight: bold; }
+.hud-bottom { position: absolute; bottom: calc(14px + env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; width: calc(100% - 24px); }
+.hint { position: absolute; bottom: calc(70px + env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); margin: 0; background: rgba(0,0,0,.55);
+  padding: 8px 14px; border-radius: 10px; font-size: 15px; text-align: center; max-width: calc(100% - 32px); pointer-events: none !important; }
+.hint:empty { display: none; }
+
+#screen-over .card { min-width: 300px; }
+.big-num { font-size: 64px; font-weight: bold; color: var(--accent); margin: 0; }
+
+.toast { position: absolute; top: 90px; left: 50%; transform: translateX(-50%); background: var(--panel); border: 2px solid var(--edge);
+  border-radius: 14px; padding: 10px 22px; font-size: 22px; font-weight: bold; pointer-events: none !important; }
+.toast.good { border-color: var(--accent2); color: var(--accent2); }
+.toast.bad { border-color: var(--danger); color: var(--danger); }
+
+@media (max-width: 640px) {
+  .card { padding: 20px 18px; }
+  .lead { font-size: 17px; }
+  .select-panel { padding: 14px 12px calc(14px + env(safe-area-inset-bottom)); }
+  .select-panel h2 { font-size: 20px; margin-bottom: 8px; }
+  .toilet-list { gap: 6px; }
+  .toilet-card { padding: 3px; font-size: 12px; border-radius: 10px; }
+  .row .btn { flex: 1 1 140px; font-size: 16px; padding: 12px 10px; }
+  .hud-top { gap: 6px; }
+  .stat { min-width: 0; padding: 4px 10px; border-radius: 10px; }
+  .stat b { font-size: 18px; }
+  .stat small { font-size: 9px; }
+  .poop-chip span { font-size: 13px; }
+  .badge { display: none; }
+  .hud-bottom { gap: 6px; }
+  .small-btn { font-size: 13px; padding: 9px 10px; flex: 1 1 0; }
+  .hint { font-size: 13px; bottom: calc(64px + env(safe-area-inset-bottom)); width: calc(100% - 32px); }
+  .toast { font-size: 18px; top: calc(70px + env(safe-area-inset-top)); white-space: nowrap; }
+}
+
+/* Short screens (phone in landscape): keep the hint and toast out of the shooting area at the bottom. */
+@media (max-height: 500px) {
+  .hint { bottom: auto; top: calc(62px + env(safe-area-inset-top)); font-size: 13px; }
+  .toast { top: calc(110px + env(safe-area-inset-top)); font-size: 17px; }
+  .select-panel { padding: 10px 12px; }
+  .select-panel h2 { display: none; }
+  .toilet-card img { max-height: 70px; }
+  #screen-start .tag, #screen-start .small { margin-top: 4px; }
+  .logo { font-size: 40px; }
+  .lead { margin: 4px 0 10px; font-size: 15px; }
+}
