@@ -1,0 +1,80 @@
+{
+  "note": "Bowl opening measured in the source .blend by a downward ray-cast heightmap (units = original model units, glTF axes). The game rescales these together with the model.",
+  "toilets": [
+    {
+      "id": "toilet_01",
+      "label": "Toilet 1",
+      "file": "models/toilet_01.glb",
+      "thumb": "thumbs/toilet_01.png",
+      "sourceObject": "6.1",
+      "bowl": {
+        "x": 0.0,
+        "z": 0.18,
+        "rx": 0.18,
+        "rz": 0.2,
+        "rimY": 0.571,
+        "bottomY": 0.451
+      }
+    },
+    {
+      "id": "toilet_02",
+      "label": "Toilet 2",
+      "file": "models/toilet_02.glb",
+      "thumb": "thumbs/toilet_02.png",
+      "sourceObject": "1.1",
+      "bowl": {
+        "x": 0.011,
+        "z": 0.045,
+        "rx": 0.28,
+        "rz": 0.31,
+        "rimY": 0.653,
+        "bottomY": 0.303
+      }
+    },
+    {
+      "id": "toilet_03",
+      "label": "Toilet 3",
+      "file": "models/toilet_03.glb",
+      "thumb": "thumbs/toilet_03.png",
+      "sourceObject": "12.1",
+      "bowl": {
+        "x": 0.029,
+        "z": 0.225,
+        "rx": 0.19,
+        "rz": 0.26,
+        "rimY": 0.558,
+        "bottomY": 0.173
+      }
+    },
+    {
+      "id": "toilet_04",
+      "label": "Toilet 4",
+      "file": "models/toilet_04.glb",
+      "thumb": "thumbs/toilet_04.png",
+      "sourceObject": "16.1",
+      "bowl": {
+        "x": 0.007,
+        "z": 0.211,
+        "rx": 0.32,
+        "rz": 0.38,
+        "rimY": 0.694,
+        "bottomY": 0.064
+      }
+    },
+    {
+      "id": "toilet_05",
+      "label": "Toilet 5",
+      "file": "models/toilet_05.glb",
+      "thumb": "thumbs/toilet_05.png",
+      "sourceObject": "18.1",
+      "bowl": {
+        "x": -0.013,
+        "z": 0.193,
+        "rx": 0.17,
+        "rz": 0.2,
+        "rimY": 0.645,
+        "bottomY": 0.222
+      }
+    }
+  ]
+}
